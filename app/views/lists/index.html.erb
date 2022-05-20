@@ -1,0 +1,21 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://static.vecteezy.com/system/resources/previews/004/288/148/original/sale-banner-poster-flyer-design-with-pattern-on-dark-black-canvas-and-grunge-texture-background-modern-design-backdrop-template-for-advertisement-social-and-fashion-ads-free-vector.jpg);">
+  <div class="container text-center">
+    <h1><strong>Make your lists of movies</strong></h1>
+  </div>
+</div>
+<div class="container m-5 d-flex flex-column justify-content-center">
+  <div class="d-flex justify-content-between margin-bottom-5">
+    <h2>My lists</h2>
+    <%= link_to "Create a movie list", new_list_path, class: "btn btn-success vertical-align-middle" %>
+  </div>
+  <div class="cards-list ">
+    <% @lists.each do |list| %>
+
+      <%= link_to list_path(list.id), action: "go" do %>
+        <div class="card-category-list" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+          <%= list.name.capitalize %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

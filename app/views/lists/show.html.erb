@@ -1,0 +1,31 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(http://www.slate.fr/sites/default/files/styles/1200x680/public/julius-drost-ariu17epnpk-unsplash_1.jpg);">
+  <div class="container text-center">
+    <h1><strong><%= @list.name.capitalize %></strong></h1>
+  </div>
+</div>
+<div class="container">
+  <div class="cards-movie">
+    <% @list.movies.each do |movie| %>
+      <div>
+          <div class="card-category">
+              <img src=<%= movie.poster_url %> />
+            <div class="card-movie-infos">
+                <div>
+                  <h2><%= movie.title %></h2>
+                  <p><%= movie.overview %></p>
+                </div>
+                <%= link_to "edit", edit_list_bookmark_path(@list, @list.bookmarks.find_by(movie_id: movie.id )) %>
+                <%= link_to "Delete", bookmark_path(@list.bookmarks.find_by(movie_id: movie.id)), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            </div>
+            <p><%= @list.bookmarks.find_by(movie_id: movie.id).comment %></p>
+          </div>
+      </div>
+    <% end %>
+  <div class="container d-flex justify-content-center">
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment %>
+    <%= f.association :movie %>
+    <%= f.submit %>
+  <% end %>
+  </div>
+</div>
