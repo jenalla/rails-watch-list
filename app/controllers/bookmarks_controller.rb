@@ -8,7 +8,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark.destroy
-    redirect_to list_path(@list), status: :see_other
+    redirect_to list_path(@list.id), status: :see_other
   end
 
   def create

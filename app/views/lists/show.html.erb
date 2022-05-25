@@ -7,25 +7,26 @@
   <div class="cards-movie">
     <% @list.movies.each do |movie| %>
       <div>
-          <div class="card-category">
-              <img src=<%= movie.poster_url %> />
-            <div class="card-movie-infos">
-                <div>
-                  <h2><%= movie.title %></h2>
-                  <p><%= movie.overview %></p>
-                </div>
-                <%= link_to "edit", edit_list_bookmark_path(@list, @list.bookmarks.find_by(movie_id: movie.id )) %>
-                <%= link_to "Delete", bookmark_path(@list.bookmarks.find_by(movie_id: movie.id)), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+        <div class="card-category">
+          <img src=<%= movie.poster_url %> />
+          <div class="card-movie-infos">
+            <div>
+              <h2><%= movie.title %></h2>
+              <p><%= movie.overview %></p>
+              <p><%= @list.bookmarks.find_by(movie_id: movie.id).comment %></p>
             </div>
-            <p><%= @list.bookmarks.find_by(movie_id: movie.id).comment %></p>
+            <%= link_to "edit", edit_list_bookmark_path(@list, @list.bookmarks.find_by(movie_id: movie.id )) %>
+            <%= link_to "Delete", bookmark_path(@list.bookmarks.find_by(movie_id: movie.id)), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
           </div>
+        </div>
       </div>
     <% end %>
-  <div class="container d-flex justify-content-center">
+  </div>
+</div>
+<div class="container d-flex justify-content-center">
   <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.input :comment %>
     <%= f.association :movie %>
     <%= f.submit %>
   <% end %>
-  </div>
 </div>
